@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="teacher.css"> <!-- Link to your CSS file -->
+    <style>
+        .teacher-section {
+            display: none;
+        }
+        .teacher-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Teacher Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('class-list')">Class List</a></li>
+                    <li><a href="#" onclick="showSection('grading-page')">Grading Page</a></li>
+                    <li><a href="#" onclick="showSection('generate-timetable')">Generate Class Timetable</a></li>
+                    <li><a href="#" onclick="showSection('newsletter')">Newsletter</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<!-- Class List Section -->
+<section id="class-list" class="teacher-section active">
+    <h2>Class List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Sex</th>
+                <th>Age</th>
+                <th>Term</th>
+                <th>Subjects Registered for Term</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example rows for students -->
+            <tr>
+                <td>001</td>
+                <td>Roselyn Agypong</td>
+                <td>Male</td>
+                <td>14</td>
+                <td>Term 1</td>
+                <td>English, Maths, Science, Computers, Religious and Moral Education, Our World Our People</td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>Martha Baidoo</td>
+                <td>Female</td>
+                <td>13</td>
+                <td>Term 1</td>
+                <td>English, Maths, Science, Computers, Religious and Moral Education, Our World Our People</td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>Emmanuel Antwi</td>
+                <td>Male</td>
+                <td>14</td>
+                <td>Term 1</td>
+                <td>English, Maths, Science, Computers, Religious and Moral Education, Our World Our People</td>
+            </tr>
+            <tr>
+                <td>004</td>
+                <td>Sarah Ohene</td>
+                <td>Female</td>
+                <td>13</td>
+                <td>Term 1</td>
+                <td>English, Maths, Science, Computers, Religious and Moral Education, Our World Our People</td>
+            </tr>
+            <tr>
+                <td>005</td>
+                <td>Anamlie Beata Atimbey</td>
+                <td>Male</td>
+                <td>14</td>
+                <td>Term 1</td>
+                <td>English, Maths, Science, Computers, Religious and Moral Education, Our World Our People</td>
+            </tr>
+            <tr>
+                <td>006</td>
+                <td>Kennedy Dramado</td>
+                <td>Female</td>
+                <td>13</td>
+                <td>Term 1</td>
+                <td>English, Maths, Science, Computers, Religious and Moral Education, Our World Our People</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+ <!-- Grading Page Section -->
+ <section id="grading-page" class="teacher-section">
+    <h2>Grading Page</h2>
+    <label for="subject">Select Subject:</label>
+    <select id="subject" name="subject" onchange="loadSubjectGrades()">
+        <option value="Mathematics">Mathematics</option>
+        <option value="English">English</option>
+        <option value="Science">Science</option>
+        <option value="Computers">Computers</option>
+        <option value="Religious and Moral Education">Religious and Moral Education</option>
+        <option value="Our World Our People">Our World Our People</option>
+        <option value="Creative Arts">Creative Arts</option>
+    </select>
+    <table id="grades-table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Class Test 1 (20%)</th>
+                <th>Class Test 2 (20%)</th>
+                <th>Group Work (10%)</th>
+                <th>Exam (100)</th>
+                <th>Total (100%)</th>
+                <th>Ranking</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example rows for students -->
+<tr data-student-id="001">
+    <td>001</td>
+    <td>John Doe</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+<tr data-student-id="002">
+    <td>002</td>
+    <td>Jane Smith</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+<tr data-student-id="003">
+    <td>003</td>
+    <td>Emily Johnson</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+<tr data-student-id="004">
+    <td>004</td>
+    <td>Michael Brown</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+<tr data-student-id="005">
+    <td>005</td>
+    <td>Alice Davis</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+<tr data-student-id="006">
+    <td>006</td>
+    <td>David Wilson</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+<tr data-student-id="007">
+    <td>007</td>
+    <td>Olivia Martinez</td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="20" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="10" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="marks" max="100" onchange="calculateTotal(this)"></td>
+    <td><input type="number" class="total-marks" readonly></td>
+    <td><input type="number" class="ranking" readonly></td>
+</tr>
+            <!-- Add more students as needed -->
+        </tbody>
+    </table>
+</section>
+        <!-- Generate Class Timetable Section -->
+<section id="generate-timetable" class="teacher-section">
+    <h2>Generate Class Timetable</h2>
+    <form action="generate_timetable.php" method="post">
+        <label for="class">Class:</label>
+        <input type="text" id="class" name="class" required>
+        
+        <label for="term">Term:</label>
+        <input type="text" id="term" name="term" required>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Period 1 Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Period 2 Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Break Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Period 3 Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Period 4 Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Lunch Break Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Period 5 Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                    <th>Closing Time
+                        <input type="time" name="monday_period1_time" class="time-select">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td>
+                        <select name="monday_period1_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                        
+                    </td>
+                    <td>
+                        <select name="monday_period2_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <input type="time" name="monday_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="monday_period3_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <select name="monday_period4_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                      
+                    </td>
+                    <td>
+                        <input type="time" name="monday_lunch_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="monday_period5_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <input type="time" name="monday_closing_time" class="time-select">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>
+                        <select name="tuesday_period1_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <select name="tuesday_period2_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                      
+                    </td>
+                    <td>
+                        <input type="time" name="tuesday_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="tuesday_period3_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <select name="tuesday_period4_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                        <input type="time" name="tuesday_period4_time" class="time-select">
+                    </td>
+                    <td>
+                        <input type="time" name="tuesday_lunch_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="tuesday_period5_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                      
+                    </td>
+                    <td>
+                        <input type="time" name="tuesday_closing_time" class="time-select">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>
+                        <select name="wednesday_period1_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                     
+                    </td>
+                    <td>
+                        <select name="wednesday_period2_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <input type="time" name="wednesday_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="wednesday_period3_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <select name="wednesday_period4_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                      
+                    </td>
+                    <td>
+                        <input type="time" name="wednesday_lunch_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="wednesday_period5_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                     
+                    </td>
+                    <td>
+                        <input type="time" name="wednesday_closing_time" class="time-select">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>
+                        <select name="thursday_period1_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                    
+                    </td>
+                    <td>
+                        <select name="thursday_period2_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                        
+                    </td>
+                    <td>
+                        <input type="time" name="thursday_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="thursday_period3_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <select name="thursday_period4_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                      
+                    </td>
+                    <td>
+                        <input type="time" name="thursday_lunch_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="thursday_period5_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                        
+                    </td>
+                    <td>
+                        <input type="time" name="thursday_closing_time" class="time-select">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>
+                        <select name="friday_period1_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                
+                    </td>
+                    <td>
+                        <select name="friday_period2_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <input type="time" name="friday_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="friday_period3_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <select name="friday_period4_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                     
+                    </td>
+                    <td>
+                        <input type="time" name="friday_lunch_break_time" class="time-select">
+                    </td>
+                    <td>
+                        <select name="friday_period5_subject" class="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Maths">Maths</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Religious and Moral Education">R.M.E</option>
+                            <option value="Our World">Our World</option>
+                        </select>
+                       
+                    </td>
+                    <td>
+                        <input type="time" name="friday_closing_time" class="time-select">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Generate Timetable</button>
+    </form>
+</section>
+  <!-- Newsletter Section -->
+  <section id="newsletter" class="teacher-section">
+    <h2>Important Notifications</h2>
+    <!-- Newsletter Content -->
+    <div class="newsletters">
+        <article>
+            <h3>New School Policies</h3>
+            <p>We are implementing new policies to improve the learning environment. Please review the new guidelines in the attached document.</p>
+        </article>
+        <article>
+            <h3>Upcoming Parent-Teacher Conference</h3>
+            <p>The next parent-teacher conference will be held on [date]. Please mark your calendars and make arrangements to attend.</p>
+        </article>
+        <!-- Add more notifications as needed -->
+    </div>
+</section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Student Management System</p>
+    </footer>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.teacher-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function calculateTotal(element) {
+            const row = element.closest('tr');
+            const marks = row.querySelectorAll('.marks');
+            let total = 0;
+            marks.forEach(mark => {
+                total += parseFloat(mark.value) || 0;
+            });
+            row.querySelector('.total-marks').value = total;
+            // Additional logic for ranking can be implemented here
+        }  
+        // Function to calculate total marks and update ranking
+function calculateTotal(element) {
+    // Get the row containing the element
+    const row = element.closest('tr');
+    
+    // Get the input elements for marks
+    const classTest1 = row.querySelector('td:nth-child(3) input').valueAsNumber || 0;
+    const classTest2 = row.querySelector('td:nth-child(4) input').valueAsNumber || 0;
+    const groupWork = row.querySelector('td:nth-child(5) input').valueAsNumber || 0;
+    const exam = row.querySelector('td:nth-child(6) input').valueAsNumber || 0;
+    
+    // Calculate the total marks
+    const totalMarks = (classTest1 ) + (classTest2 ) + (groupWork ) + (exam * 0.5);
+    
+    // Update the total marks input
+    row.querySelector('.total-marks').value = totalMarks.toFixed(2);
+    
+    // Update rankings
+    updateRankings();
+}
+
+// Function to update rankings
+function updateRankings() {
+    // Get all rows
+    const rows = Array.from(document.querySelectorAll('#grades-table tbody tr'));
+    
+    // Create an array of students with total marks and row element
+    const students = rows.map(row => {
+        return {
+            element: row,
+            totalMarks: parseFloat(row.querySelector('.total-marks').value) || 0
+        };
+    });
+
+    // Sort students by total marks in descending order
+    students.sort((a, b) => b.totalMarks - a.totalMarks);
+
+    // Update ranking for each student
+    students.forEach((student, index) => {
+        student.element.querySelector('.ranking').value = index + 1;
+    });
+}
+
+// Attach event listeners to all input elements
+document.querySelectorAll('.marks').forEach(input => {
+    input.addEventListener('change', () => calculateTotal(input));
+});
+
+    </script>
+</body>
+</html>

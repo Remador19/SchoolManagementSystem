@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Styles */
+main {
+    margin-top: 70px; /* Adjust according to header height */
+}
+
+.parent-section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Child Biography Styles */
+.child-biography {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.child-biography .bio-column {
+    flex: 1 1 30%; /* Adjust for 3 columns */
+    box-sizing: border-box;
+}
+
+.child-biography .bio-column p {
+    margin: 10px 0;
+}
+
+/* Child Performance Styles */
+.child-performance {
+    margin-top: 20px;
+}
+
+.child-performance table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.child-performance table, th, td {
+    border: 1px solid #ddd;
+}
+
+.child-performance th, .child-performance td {
+    padding: 10px;
+    text-align: left;
+}
+
+.child-performance thead th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.child-performance tbody td {
+    text-align: center;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #45a049;
+}

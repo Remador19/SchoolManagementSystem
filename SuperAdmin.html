@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin - Student Management System</title>
+    <link rel="stylesheet" href="admin.css"> <!-- Link to your CSS file -->
+    <style>
+        .admin-section {
+            display: none;
+        }
+        .admin-section.active {
+            display: block;
+        }
+        .billing-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        } 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <!-- Chatra script -->
+    <script>
+        (function(d, w, c) {
+            w.ChatraID = 'YOUR_CHATRA_ID'; // Replace with your Chatra ID
+            var s = d.createElement
+            w[c] = w[c] || function() {
+                (w[c].q = w[c].q || []).push(arguments);
+            };
+            s.async = true;
+            s.src = 'https://call.chatra.io/chatra.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.admin-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function fetchAllResults() {
+            // Simulate an API call to fetch all student results
+            const results = [
+                { studentName: 'John A. Doe', subject: 'Mathematics', ct1: 15, ct2: 18, gw: 8, exam: 40, total: 81, status: 'Pending' },
+                { studentName: 'John A. Doe', subject: 'English Language', ct1: 14, ct2: 17, gw: 7, exam: 38, total: 76, status: 'Pending' },
+                { studentName: 'Jane B. Smith', subject: 'Mathematics', ct1: 16, ct2: 19, gw: 9, exam: 42, total: 86, status: 'Pending' },
+                { studentName: 'Jane B. Smith', subject: 'English Language', ct1: 13, ct2: 16, gw: 6, exam: 35, total: 70, status: 'Pending' }
+                // Add more student results as needed
+            ];
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            const resultsBody = document.getElementById('results-body');
+            resultsBody.innerHTML = '';
+            results.forEach(result => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${result.studentName}</td>
+                    <td>${result.subject}</td>
+                    <td>${result.ct1}</td>
+                    <td>${result.ct2}</td>
+                    <td>${result.gw}</td>
+                    <td>${result.exam}</td>
+                    <td>${result.total}</td>
+                    <td>${result.status}</td>
+                `;
+                resultsBody.appendChild(row);
+            });
+            document.getElementById('results-table').style.display = 'block';
+        }
+
+        function approveResults() {
+            // Simulate an API call to approve the results
+            alert('Results approved successfully!');
+            // Update the status in the results table
+            const resultsBody = document.getElementById('results-body');
+            resultsBody.querySelectorAll('tr').forEach(row => {
+                row.cells[7].innerText = 'Approved';
+            });
+        }
+
+        // Fetch all results when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAllResults);
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Super Admin Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('manage-users-roles')">Manage Users & Roles</a></li>
+                    <li><a href="#" onclick="showSection('create-class')">Create Class</a></li>
+                    <li><a href="#" onclick="showSection('add-learner')">Add Learner</a></li>
+                    <li><a href="#" onclick="showSection('billing')">Billing</a></li>
+                    <li><a href="#" onclick="showSection('book-section')">Book Section</a></li>
+                    <li><a href="#" onclick="showSection('view-results')">View Results</a></li>
+                    <li><a href="#" onclick="showSection('newsletter')">Newsletter</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Manage Users & Roles Section -->
+        <section id="manage-users-roles" class="admin-section active">
+            <h2>Manage Users & Roles</h2>
+            <!-- Form for managing users and roles -->
+            <form id="manage-users-form">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name">
+                <label for="middle-name">Middle Name:</label>
+                <input type="text" id="middle-name" name="middle-name">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <label for="contact-number">Contact Number:</label>
+                <input type="text" id="contact-number" name="contact-number">
+                <label for="role">Role:</label>
+                <select id="role" name="role">
+                    <option value="teacher">Teacher</option>
+                    <option value="parent">Parent</option>
+                    <option value="admin">Administrator</option>
+                </select>
+                <label for="permissions">Permissions:</label>
+                <textarea id="permissions" name="permissions"></textarea>
+                <button type="button" onclick="addUserRole()">Add User/Role</button>
+                <button type="button" onclick="editUserRole()">Edit User/Role</button>
+                <button type="button" onclick="deleteUserRole()">Delete User/Role</button>
+            </form>
+            <div id="user-role-display"></div>
+        </section>
+
+        <!-- Create Class Section -->
+        <section id="create-class" class="admin-section">
+            <h2>Create Class</h2>
+            <!-- Form for creating a class -->
+            <form id="create-class-form">
+                <label for="class-name">Class Name:</label>
+                <input type="text" id="class-name" name="class-name">
+                <label for="class-teacher-name">Class Teacher's Name:</label>
+                <input type="text" id="class-teacher-name" name="class-teacher-name">
+                <label for="term-semester">Term/Semester:</label>
+                <input type="text" id="term-semester" name="term-semester">
+                <button type="button" onclick="addClass()">Add Class</button>
+                <button type="button" onclick="editClass()">Edit Class</button>
+                <button type="button" onclick="deleteClass()">Delete Class</button>
+            </form>
+            <div id="class-display"></div>
+        </section>
+
+        <!-- Add Learner Section -->
+        <section id="add-learner" class="admin-section">
+            <h2>Add Learner</h2>
+            <!-- Form for adding a learner -->
+            <form id="add-learner-form">
+                <label for="learner-first-name">First Name:</label>
+                <input type="text" id="learner-first-name" name="learner-first-name">
+                <label for="learner-middle-name">Middle Name:</label>
+                <input type="text" id="learner-middle-name" name="learner-middle-name">
+                <label for="learner-last-name">Last Name:</label>
+                <input type="text" id="learner-last-name" name="learner-last-name">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age">
+                <label for="class">Class:</label>
+                <input type="text" id="class" name="class">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label for="nationality">Nationality:</label>
+                <input type="text" id="nationality" name="nationality">
+                <label for="home-address">Home Address:</label>
+                <input type="text" id="home-address" name="home-address">
+                <label for="subjects">Subjects:</label>
+                <div id="subjects">
+                    <input type="checkbox" id="english" name="subjects[]" value="English Language">
+                    <label for="english">English Language</label><br>
+                    <input type="checkbox" id="writing" name="subjects[]" value="Writing">
+                    <label for="writing">Writing</label><br>
+                    <input type="checkbox" id="mathematics" name="subjects[]" value="Mathematics">
+                    <label for="mathematics">Mathematics</label><br>
+                    <input type="checkbox" id="social-studies" name="subjects[]" value="Social Studies">
+                    <label for="social-studies">Social Studies</label><br>
+                    <input type="checkbox" id="creative-art" name="subjects[]" value="Creative Art">
+                    <label for="creative-art">Creative Art</label><br>
+                    <input type="checkbox" id="religious-moral" name="subjects[]" value="Religious and Moral Education">
+                    <label for="religious-moral">Religious and Moral Education</label><br>
+                    <input type="checkbox" id="computing" name="subjects[]" value="Computing">
+                    <label for="computing">Computing</label><br>
+                    <input type="checkbox" id="career-tech" name="subjects[]" value="Career Technology">
+                    <label for="career-tech">Career Technology</label><br>
+                    <input type="checkbox" id="french" name="subjects[]" value="French">
+                    <label for="french">French</label><br>
+                    <input type="checkbox" id="music" name="subjects[]" value="Music">
+                    <label for="music">Music</label><br>
+                    <input type="checkbox" id="ghanaian-lang" name="subjects[]" value="Ghanaian Language">
+                    <label for="ghanaian-lang">Ghanaian Language</label><br>
+                    <input type="checkbox" id="arabic" name="subjects[]" value="Arabic">
+                    <label for="arabic">Arabic</label><br>
+                    <input type="checkbox" id="others" name="subjects[]" value="Others">
+                    <label for="others">Others (specify):</label>
+                    <input type="text" id="other-subjects" name="other-subjects">
+                </div>
+                <label for="guardian-name">Guardian's Name:</label>
+                <input type="text" id="guardian-name" name="guardian-name">
+                <label for="guardian-contact">Guardian's Contact:</label>
+                <input type="text" id="guardian-contact" name="guardian-contact">
+                <label for="guardian-email">Guardian's Email:</label>
+                <input type="email" id="guardian-email" name="guardian-email">
+                <label for="relationship">Relationship:</label>
+                <input type="text" id="relationship" name="relationship">
+                <button type="button" onclick="addLearner()">Add Learner</button>
+                <button type="button" onclick="editLearner()">Edit Learner</button>
+                <button type="button" onclick="deleteLearner()">Delete Learner</button>
+            </form>
+            <div id="learner-display"></div>
+        </section>
+
+        <!-- Billing Section -->
+        <section id="billing" class="admin-section">
+            <h2>Billing</h2>
+            <!-- Form for adding billing information -->
+            <form id="billing-form">
+                <label for="learner-name">Learner's Name:</label>
+                <input type="text" id="learner-name" name="learner-name">
+                <label for="term">Term/Semester:</label>
+                <input type="text" id="term" name="term">
+                <div id="billing-items">
+                    <div class="billing-item">
+                        <input type="text" name="billing-item-description[]" placeholder="Item Description">
+                        <input type="number" name="billing-item-amount[]" placeholder="Amount">
+                    </div>
+                </div>
+                <button type="button" onclick="addBillingItem()">Add Billing Item</button>
+                <button type="button" onclick="addBilling()">Add Billing</button>
+                <button type="button" onclick="editBilling()">Edit Billing</button>
+                <button type="button" onclick="deleteBilling()">Delete Billing</button>
+            </form>
+            <div id="billing-display"></div>
+        </section>
+
+        <!-- Book Section -->
+        <section id="book-section" class="admin-section">
+            <h2>Book Section</h2>
+            <!-- Form for managing books -->
+            <form id="book-form">
+                <label for="book-title">Book Title:</label>
+                <input type="text" id="book-title" name="book-title">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author">
+                <label for="isbn">ISBN:</label>
+                <input type="text" id="isbn" name="isbn">
+                <label for="publish-year">Year of Publication:</label>
+                <input type="text" id="publish-year" name="publish-year">
+                <button type="button" onclick="addBook()">Add Book</button>
+                <button type="button" onclick="editBook()">Edit Book</button>
+                <button type="button" onclick="deleteBook()">Delete Book</button>
+            </form>
+            <div id="book-display"></div>
+        </section>
+        <section id="view-results" class="admin-section">
+            <h2>View and Approve Student Results</h2>
+        
+            <!-- Results Table -->
+            <div id="results-table">
+                <h3>Student Results</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Subject</th>
+                            <th>Class Test 1 (20%)</th>
+                            <th>Class Test 2 (20%)</th>
+                            <th>Group Work (10%)</th>
+                            <th>Exam (50%)</th>
+                            <th>Total (100%)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Sample Results -->
+                        <tr>
+                            <td>Emmanuel Antwi</td>
+                            <td>Mathematics</td>
+                            <td>18</td>
+                            <td>17</td>
+                            <td>8</td>
+                            <td>45</td>
+                            <td>88</td>
+                            <td>Approved</td>
+                        </tr>
+                        <tr>
+                            <td>Reuben Dordunu</td>
+                            <td>Science</td>
+                            <td>15</td>
+                            <td>19</td>
+                            <td>9</td>
+                            <td>43</td>
+                            <td>86</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>Michael Ayitey</td>
+                            <td>English</td>
+                            <td>19</td>
+                            <td>16</td>
+                            <td>7</td>
+                            <td>46</td>
+                            <td>88</td>
+                            <td>Approved</td>
+                        </tr>
+                        <tr>
+                            <td>Martha Baidoo</td>
+                            <td>Computers</td>
+                            <td>20</td>
+                            <td>18</td>
+                            <td>9</td>
+                            <td>42</td>
+                            <td>89</td>
+                            <td>Pending</td>
+                        </tr>
+                        <!-- More sample results can be added similarly -->
+                    </tbody>
+                </table>
+                <button onclick="approveResults()">Approve Results</button>
+            </div>
+        </section>        
+        <!-- Newsletter Section -->
+<section id="newsletter" class="admin-section">
+    <h2>Newsletter</h2> 
+    <form id="Newsletter">
+    <form action="send_newsletter.php" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required></textarea>
+        
+        <button type="submit">Send Newsletter</button>
+    </form>
+</section>
+    </main>
+
+    <script src="admin_dashboard.js"></script>
+</body>
+</html>

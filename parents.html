@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard</title>
+    <link rel="stylesheet" href="parents.css"> <!-- Link to CSS file -->
+    <style>
+        .parent-section {
+            display: none;
+        }
+        .parent-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Parent Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('child-menu')">Child Menu</a></li>
+                    <li><a href="#" onclick="showSection('academic-performance')">Academic Performance</a></li>
+                    <li><a href="#" onclick="showSection('billing-information')">Billing Information</a></li>
+                    <li><a href="#" onclick="showSection('newsletter')">Newsletter</a></li>
+                    <li><a href="#" onclick="showSection('timetable-view')">Timetable View</a></li>
+                    <li><a href="#" onclick="showSection('book-section')">Book Section</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Child Menu Section -->
+        <section id="child-menu" class="parent-section active">
+            <h2>Child Demography</h2>
+            <!-- Child Information Content -->
+            <div class="child-biography">
+                <div class="bio-column">
+                    <p><strong>First Name:</strong> Reuben</p>
+                    <p><strong>Middle Name:</strong> K.</p>
+                    <p><strong>Last Name:</strong> Dordunu</p>
+                </div>
+                <div class="bio-column">
+                    <p><strong>Class:</strong> 8</p>
+                    <p><strong>Date of Birth:</strong> 2009-01-01</p>
+                    <p><strong>Age:</strong> 14</p>
+                </div>
+                <div class="bio-column">
+                    <p><strong>Sex:</strong> Male</p>
+                    <p><strong>Nationality:</strong> Ghanaian</p>
+                    <p><strong>Home Address:</strong> 123 Main St, Accra, Ghana</p>
+                </div>
+                <div class="bio-column">
+                    <p><strong>Subjects:</strong></p>
+                    <ul>
+                        <li>English Language</li>
+                        <li>Mathematics</li>
+                        <li>Social Studies</li>
+                        <li>Computing</li>
+                        <!-- Add more subjects as needed -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic Performance Section -->
+        <section id="academic-performance" class="parent-section">
+            <h2>Academic Performance</h2>
+            <!-- Child Academic Performance Content -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Class Test 1 (20%)</th>
+                        <th>Class Test 2 (20%)</th>
+                        <th>Group Work (10%)</th>
+                        <th>Exam (50%)</th>
+                        <th>Total (100%)</th>
+                        <th>Ranking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mathematics</td>
+                        <td>15</td>
+                        <td>18</td>
+                        <td>8</td>
+                        <td>40</td>
+                        <td>81</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>English Language</td>
+                        <td>14</td>
+                        <td>17</td>
+                        <td>7</td>
+                        <td>38</td>
+                        <td>76</td>
+                        <td>3</td>
+                    </tr>
+                    <!-- Add more subjects as needed -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Billing Information Section -->
+        <section id="billing-information" class="parent-section">
+            <h2>Billing Information</h2>
+            <!-- Child Billing Information Content -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parent Name</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Previous Balance</th>
+                        <th>School Fees</th>
+                        <th>Extra Classes Fee</th>
+                        <th>PTA</th>
+                        <th>Exam Fee</th>
+                        <th>Utilities</th>
+                        <th>Book Fees</th>
+                        <th>Total Bill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paul Komla Dordunu.</td>
+                        <td>12345</td>
+                        <td>Reuben K. Dordunu</td>
+                        <td>GH₵200</td>
+                        <td>GH₵500</td>
+                        <td>GH₵100</td>
+                        <td>GH₵50</td>
+                        <td>GH₵75</td>
+                        <td>GH₵25</td>
+                        <td>GH₵150</td>
+                        <td>GH₵1100</td> <!-- Total Bill Calculation -->
+                    </tr>
+                    <!-- Add more billing details as needed -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="parent-section">
+            <h2>Important Notifications</h2>
+            <!-- Newsletter Content -->
+            <div class="newsletters">
+                <article>
+                    <h3>New School Policies</h3>
+                    <p>We are implementing new policies to improve the learning environment. Please review the new guidelines in the attached document.</p>
+                </article>
+                <article>
+                    <h3>Upcoming Parent-Teacher Conference</h3>
+                    <p>The next parent-teacher conference will be held on [date]. Please mark your calendars and make arrangements to attend.</p>
+                </article>
+                <!-- Add more notifications as needed -->
+            </div>
+        </section>
+
+        <!-- Timetable View Section -->
+        <section id="timetable-view" class="parent-section">
+            <h2>Timetable View</h2>
+            <!-- Timetable Content -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>8:00 - 9:00</th>
+                        <th>9:00 - 10:00</th>
+                        <th>10:00 - 11:00</th>
+                        <th>11:00 - 12:00</th>
+                        <th>12:00 - 1:00</th>
+                        <th>1:00 - 2:00</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td>Mathematics</td>
+                        <td>English Language</td>
+                        <td>Break</td>
+                        <td>Social Studies</td>
+                        <td>Computing</td>
+                        <td>PE</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>Science</td>
+                        <td>Mathematics</td>
+                        <td>Break</td>
+                        <td>English Language</td>
+                        <td>History</td>
+                        <td>Music</td>
+                    </tr>
+                    <!-- Add more timetable details as needed -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Book Section -->
+        <section id="book-section" class="parent-section">
+            <h2>Prescribed Books</h2>
+            <!-- Book Content -->
+            <div class="books">
+                <div class="book">
+                    <h3>English Language</h3>
+                    <p><strong>Title:</strong> Oxford English</p>
+                    <p><strong>Author:</strong> John Doe</p>
+                    <p><strong>ISBN:</strong> 1234567890</p>
+                </div>
+                <div class="book">
+                    <h3>Mathematics</h3>
+                    <p><strong>Title:</strong> Advanced Mathematics</p>
+                    <p><strong>Author:</strong> Prof. Abena Asare</p>
+                    <p><strong>ISBN:</strong> 0987654321</p>
+                </div>
+                <!-- Add more books as needed -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Student Management System</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.parent-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
